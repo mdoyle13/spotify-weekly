@@ -38,6 +38,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 # add oauth capes
 gem 'omniauth'
+# spotify omniauth gem
+gem 'omniauth-spotify', github: 'mdoyle13/omniauth-spotify'
+# spotify wrapper gem
+gem 'rspotify', github: "guilhermesad/rspotify"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
