@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+notes for me
 
-Things you may want to cover:
+spotify_user = RSpotify::User.new(u.auth_hash)
 
-* Ruby version
+weekly = spotify_user.playlists.select {|p| p.name == "Discover Weekly"}[0]
 
-* System dependencies
+tracks = weekly.tracks
 
-* Configuration
+playlist = spotify_user.create_playlist!('weekly-backup')
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+playlist.add_tracks!(tracks)
