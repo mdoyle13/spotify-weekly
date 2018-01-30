@@ -20,4 +20,14 @@ class User < ApplicationRecord
 
     record
   end
+
+  def sync_discover_weekly
+    # load the playlist id off the user
+    # get it from spotify
+    # load the tracks
+    # create new playlist on spotify for the user effectively backing it up
+    # store the playlist in db
+    # store the tracks in db
+    
+  end
 end
