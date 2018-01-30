@@ -5,4 +5,9 @@ Rails.application.routes.draw do
   # spotify auth callback
   get '/auth/spotify/callback', to: 'users#spotify'
   get 'dashboard', to: 'dashboard#index'
+  
+
+  resource :playlists, only: [] do
+    post 'initial_weekly_sync', on: :collection
+  end
 end
