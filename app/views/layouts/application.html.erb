@@ -10,7 +10,7 @@
 
   <body>
     <% if user_signed_in? %>
-      <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+      <p>hey <%= current_user.info["name"] %> | <%= link_to('Logout', destroy_user_session_path, method: :delete) %></p>
     <% else %>
       <%= link_to 'Sign in with Spotify', user_spotify_omniauth_authorize_path %>
     <% end %>

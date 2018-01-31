@@ -1,7 +1,7 @@
 class PlaylistsController < ApplicationController
     before_action :authenticate_user!
 
-    def initial_weekly_sync
+    def retrieve_discover_weekly
         # Notes: i don't think i need to store this. Maybe store weekly playlist id on the user reocrd
         # and then back that up immediately 
         spotify_service = SpotifyService.new(current_user)
@@ -11,12 +11,12 @@ class PlaylistsController < ApplicationController
         
         current_user.discover_weekly_id = discover_weekly.id
         current_user.save
-        # pl = current_user.playlists.where(spotify_id: discover_weekly.id, name: "Discover Weekly")
-        #     .first_or_create
+        redirect_to dashboard_path
+    end
 
-        # create the tracks
-        # discover_weekly.tracks.each do |track|
-        #    pl.tracks.create(spotify_id: track.id, data: track)
-        # end
+    def sync_discover_weekly
+        spotify_service = SpotifyService.new(current_user)
+        spotify_service.sync_discover_weekly
+        redirect_to dashboard_path
     end
 end

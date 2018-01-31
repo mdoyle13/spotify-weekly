@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   
 
   resource :playlists, only: [] do
-    post 'initial_weekly_sync', on: :collection
+    post 'retrieve_discover_weekly', on: :collection
+    post 'sync_discover_weekly'
   end
 end

@@ -1,4 +1,25 @@
+<br>
 welcome to your dashboard
 
-<%= button_to "Initialize Discover Weekly Sync", initial_weekly_sync_playlists_path %>
+<br>
 
+<br>
+<% if current_user.has_discover_weekly? %>
+    We have your discover weekly playlist: <%= current_user.discover_weekly_id %>
+    <br>
+    <%= button_to "Back up this week's playlist", sync_discover_weekly_playlists_path %>
+<% else %>
+    <%= button_to "Find my discover weekly playlist", retrieve_discover_weekly_playlists_path %>
+<% end %>
+
+
+<ul>
+<% current_user.playlists.each do |pl| %>
+    <li><%= pl.name %></li>
+    <ul>
+        <% pl.tracks.each do |track| %>
+            <li><%= track.name %></li>
+        <% end %>
+    </ul>
+<% end %>
+</ul>
