@@ -9,14 +9,6 @@ class SpotifyService
         # will return nil if no playlist found
     end
 
-    def get_tracks(playlist)
-        tracks = playlist.tracks
-    end
-
-    def create_new_playlist
-        playlist = spotify_user.create_playlist!('weekly-backup')
-    end
-
     def sync_discover_weekly
         spotify_playlist = get_weekly_playlist
         tracks = spotify_playlist.tracks
@@ -33,9 +25,10 @@ class SpotifyService
             pl.data = backup_playlist
         end
 
-        db_playlist.save
+        return false unless db_playlist.save
         
-        tracks.each do |track|
+        # reverse the tracks so they are created in the same order as on spotify?
+        tracks.reverse.each do |track|
            db_playlist.tracks.create(spotify_id: track.id, data: track)
         end
 

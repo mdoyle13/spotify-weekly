@@ -16,7 +16,9 @@ class PlaylistsController < ApplicationController
 
     def sync_discover_weekly
         spotify_service = SpotifyService.new(current_user)
-        spotify_service.sync_discover_weekly
+        unless spotify_service.sync_discover_weekly
+            flash[:error] = "WOhan nelly"
+        end
         redirect_to dashboard_path
     end
 end

@@ -9,6 +9,14 @@
   </head>
 
   <body>
+    <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
+
+      <% if flash[:error] %>
+        <div class="error"><%= flash[:error] %></div>
+      <% end %>
+
     <% if user_signed_in? %>
       <p>hey <%= current_user.info["name"] %> | <%= link_to('Logout', destroy_user_session_path, method: :delete) %></p>
     <% else %>

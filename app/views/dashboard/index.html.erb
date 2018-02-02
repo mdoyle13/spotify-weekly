@@ -14,7 +14,7 @@ welcome to your dashboard
 
 
 <ul>
-<% current_user.playlists.each do |pl| %>
+<% @playlists.each do |pl| %>
     <li><%= pl.name %></li>
     <ul>
         <% pl.tracks.each do |track| %>

@@ -3,5 +3,7 @@ class DashboardController < ActionController::Base
   
   layout "application"
 
-  def index; end
+  def index
+    @playlists = current_user.playlists.order('id ASC')
+  end
 end
