@@ -1,18 +1,29 @@
 class SpotifyService
     def initialize(user)
         @user_record = user
-        @spotify_user = RSpotify::User.new(user.auth_hash)
-    end
+        @response = OpenStruct.new(success?: false, message: nil)
 
-    def get_weekly_playlist
-        playlist = @spotify_user.playlists.select {|p| p.name == "Discover Weekly"}[0]
-        # will return nil if no playlist found
+        # oauth with spotify
+        begin
+            @spotify_user = RSpotify::User.new(user.auth_hash)
+        rescue
+            @response.send("success?=", false)
+            @response.message = "there was a problem authenticating with spotify please try again later"
+            return @response
+        end
     end
-
+    
     def sync_discover_weekly
         spotify_playlist = get_weekly_playlist
         tracks = spotify_playlist.tracks
         db_playlist = @user_record.playlists.new
+
+        # so we dont create dupes of the spotify playlist
+        unless db_playlist.valid?
+           @response.send("success?=", false)
+           @response.message = db_playlist.errors.full_messages.to_sentence
+           return @response
+        end
 
         name = db_playlist.week_of_name
 
@@ -33,5 +44,11 @@ class SpotifyService
         end
 
         return true
+    end
+
+    private
+    def get_weekly_playlist
+        playlist = @spotify_user.playlists.select {|p| p.name == "Discover Weekly"}[0]
+        # will return nil if no playlist found
     end
 end

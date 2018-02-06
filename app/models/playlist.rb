@@ -1,9 +1,7 @@
 class Playlist < ApplicationRecord
     belongs_to :user
-    has_many :tracks
+    has_many :tracks, dependent: :destroy
     validate :user_id_and_week_of_is_unique
-    validates :spotify_id, uniqueness: {scope: :user}
-    
 
     # set the week of date before creating. the week of date is how to tell 
     # if 'this weeks' discover weekly has been backed up already
@@ -23,7 +21,8 @@ class Playlist < ApplicationRecord
     private
     def user_id_and_week_of_is_unique
         if Playlist.where(user_id: self.user_id, week_of: get_week_of).present?
-            errors.add(:week_of, "has already been taken")
+            errors.add(:base, "already backed up your discover weekly this week. 
+                you can restore it to spotify if you need toyou need to")
         end
     end
 end

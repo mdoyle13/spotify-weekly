@@ -18,7 +18,7 @@ welcome to your dashboard
     <li><%= pl.name %></li>
     <ul>
         <% pl.tracks.each do |track| %>
-            <li><%= track.name %></li>
+            <li><%= track.formatted_artist_name %> - <%= track.name %></li>
         <% end %>
     </ul>
 <% end %>
