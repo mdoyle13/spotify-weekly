@@ -44,6 +44,7 @@ gem 'omniauth-spotify', github: 'mdoyle13/omniauth-spotify'
 gem 'rspotify', github: "guilhermesad/rspotify"
 # process background jobs
 gem 'sidekiq'
+gem 'sidekiq-scheduler'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
