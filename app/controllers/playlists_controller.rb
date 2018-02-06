@@ -15,12 +15,12 @@ class PlaylistsController < ApplicationController
     end
 
     def sync_discover_weekly
-        @spotify_service = SpotifyService.new(current_user).sync_discover_weekly
+        @spotify_service = SpotifyService.new(current_user).call
 
         unless @spotify_service.success?
             flash[:error] = @spotify_service.message
         end
-
+        flash[:notice] = @spotify_service.message
         redirect_to dashboard_path
     end
 end
