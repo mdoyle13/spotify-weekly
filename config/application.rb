@@ -18,5 +18,7 @@ module SpotifyWeekly
     # Rspotify setup
     RSpotify::authenticate("f006a0d2f05540c6844a6c65abc104d6", "c1ecc2faa2f74021bd9d9bc7a4954d78")
 
+    # specify the background job system we want to use
+    config.active_job.queue_adapter = :sidekiq
   end
 end

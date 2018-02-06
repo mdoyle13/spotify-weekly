@@ -42,6 +42,8 @@ gem 'omniauth'
 gem 'omniauth-spotify', github: 'mdoyle13/omniauth-spotify'
 # spotify wrapper gem
 gem 'rspotify', github: "guilhermesad/rspotify"
+# process background jobs
+gem 'sidekiq'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -49,6 +51,7 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'dotenv-rails'
 end
 
 group :development do
