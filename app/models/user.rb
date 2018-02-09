@@ -22,26 +22,6 @@ class User < ApplicationRecord
     record
   end
 
-  
-    # load the playlist id off the user
-    # get it from spotify
-    # load the tracks
-    # create new playlist on spotify for the user effectively backing it up
-    # store the playlist in db
-    # store the tracks in db
-
-
-
-    # pl = current_user.playlists.where(spotify_id: discover_weekly.id, name: "Discover Weekly")
-        #     .first_or_create
-
-        # create the tracks
-        # discover_weekly.tracks.each do |track|
-        #    pl.tracks.create(spotify_id: track.id, data: track)
-        # end
-  
-
-
   def has_discover_weekly?
     self.discover_weekly_id.present?
   end

@@ -2,27 +2,29 @@ class PlaylistsController < ApplicationController
     before_action :authenticate_user!
 
     def retrieve_discover_weekly
-        # Notes: i don't think i need to store this. Maybe store weekly playlist id on the user reocrd
-        # and then back that up immediately 
-        spotify_service = SpotifyService.new(current_user)
+      # this method will be called when a user needs to manually attach the weekly id
 
-        discover_weekly = spotify_service.get_weekly_playlist
-        throw "no discover weekly for this user" unless discover_weekly
-        
-        current_user.discover_weekly_id = discover_weekly.id
+      @spotify_weekly_playlist_service = SpotifyWeeklyPlaylistService.new(current_user).call
+      
+      if @spotify_weekly_playlist_service.success?
+        current_user.discover_weekly_id = @spotify_weekly_playlist_service.playlist.id
         current_user.save
-        redirect_to dashboard_path
+      else
+        flash[:error] = @spotify_weekly_playlist_service.message
+      end
+
+      redirect_to dashboard_path
     end
 
     def sync_discover_weekly
-        @spotify_service = SpotifyService.new(current_user).call
+      @spotify_service = SpotifyBackupService.new(current_user).call
 
-        if @spotify_service.success?
-          flash[:notice] = @spotify_service.message
-        else
-          flash[:error] = @spotify_service.message
-        end
-        
-        redirect_to dashboard_path
+      if @spotify_service.success?
+        flash[:notice] = @spotify_service.message
+      else
+        flash[:error] = @spotify_service.message
+      end
+      
+      redirect_to dashboard_path
     end
 end
