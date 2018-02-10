@@ -17,7 +17,7 @@ welcome to your dashboard
 <% @playlists.each do |pl| %>
     <li><%= pl.name %></li>
     <ul>
-        <% pl.tracks.each do |track| %>
+        <% pl.tracks.order('id ASC').each do |track| %>
             <li><%= track.formatted_artist_name %> - <%= track.name %></li>
         <% end %>
     </ul>

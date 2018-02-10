@@ -58,7 +58,7 @@ class SpotifyBackupService
       end
 
       # reverse the tracks so they are created in the same order as on spotify?
-      remote_playlist.tracks.reverse.each do |track|
+      remote_playlist.tracks.each do |track|
          db_playlist.tracks.create(spotify_id: track.id, data: track)
       end
 
