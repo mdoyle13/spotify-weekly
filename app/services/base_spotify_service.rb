@@ -11,4 +11,6 @@ class BaseSpotifyService
       return @response
     end
   end
+
+  attr_reader :spotify_user
 end

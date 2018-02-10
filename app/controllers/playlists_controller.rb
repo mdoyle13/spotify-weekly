@@ -1,9 +1,8 @@
 class PlaylistsController < ApplicationController
   before_action :authenticate_user!
+  before_action :load_playlist, only: [:destroy, :restore_to_spotify]
 
   def destroy
-    @playlist = Playlist.find(params[:id])
-
     if @playlist.destroy
       flash[:notice] = "Successfully deleted playlist"
     else
@@ -14,7 +13,18 @@ class PlaylistsController < ApplicationController
   end
 
   def restore_to_spotify
+    spotify_service = BaseSpotifyService.new(current_user)
     
+    spotify_user = spotify_service.spotify_user
+
+    db_tracks = @playlist.tracks.order('id ASC').collect(&:spotify_id)
+    spotify_tracks = RSpotify::Track.find(db_tracks)
+    
+    playlist = spotify_user.create_playlist!(@playlist.name)
+    
+    playlist.add_tracks!(spotify_tracks)
+
+    redirect_to dashboard_path
   end
 
   def retrieve_discover_weekly
@@ -42,5 +52,10 @@ class PlaylistsController < ApplicationController
     end
     
     redirect_to dashboard_path
+  end
+
+  private
+  def load_playlist
+    @playlist = Playlist.find(params[:id])
   end
 end
