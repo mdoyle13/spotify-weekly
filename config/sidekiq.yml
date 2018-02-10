@@ -2,7 +2,7 @@
 :schedule:
   test_job:
     cron: '* * * * *'
-    class: TestJob
+    class: BackupQueuerJob
 
 # Use the hash sign to prefix a comment
 # +---------------- minute (0 - 59)
