@@ -1,7 +1,7 @@
 :schedule:
-  hello_world:
-    cron: '59 23 * * 1'
-    class: HelloWorld
+  test_job:
+    cron: '* * * * *'
+    class: TestJob
 
 # Use the hash sign to prefix a comment
 # +---------------- minute (0 - 59)
