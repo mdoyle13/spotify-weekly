@@ -1,18 +1,4 @@
-class SpotifyBackupService
-    def initialize(user)
-      @user_record = user
-      @response = OpenStruct.new(success?: false, message: nil)
-
-      # oauth with spotify
-      begin
-          @spotify_user = RSpotify::User.new(user.auth_hash)
-      rescue
-          @response.send("success?=", false)
-          @response.message = "there was a problem authenticating with spotify please try again later"
-          return @response
-      end
-    end
-
+class SpotifyBackupService < BaseSpotifyService
     def call
       sync_discover_weekly
     end
@@ -68,6 +54,7 @@ class SpotifyBackupService
   end
 
   def get_discover_weekly
+    # fetch discover weekly from spotify
     @spotify_user.playlists.select {|p| p.name == "Discover Weekly"}[0]
   end
 

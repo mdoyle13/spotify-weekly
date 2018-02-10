@@ -19,8 +19,8 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'dashboard#index'
   
 
-  resource :playlists, only: [] do
+  resources :playlists, only: [:destroy] do
     post 'retrieve_discover_weekly', on: :collection
-    post 'sync_discover_weekly'
+    post 'sync_discover_weekly', on: :collection
   end
 end

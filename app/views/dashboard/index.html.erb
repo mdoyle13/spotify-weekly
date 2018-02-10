@@ -15,7 +15,7 @@ welcome to your dashboard
 
 <ul>
 <% @playlists.each do |pl| %>
-    <li><%= pl.name %></li>
+    <li><%= pl.name %> | <%= link_to 'delete', playlist_path(pl), method: :delete, data: { confirm: 'Are you sure?' } %></li>
     <ul>
         <% pl.tracks.order('id ASC').each do |track| %>
             <li><%= track.formatted_artist_name %> - <%= track.name %></li>
