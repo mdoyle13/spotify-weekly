@@ -1,7 +1,7 @@
 :concurrency: 2
 :schedule:
   test_job:
-    cron: '* * * * *'
+    cron: '59 23 * * 1'
     class: BackupQueuerJob
 
 # Use the hash sign to prefix a comment
