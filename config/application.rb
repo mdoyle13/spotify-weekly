@@ -26,6 +26,10 @@ module SpotifyWeekly
     # specify the background job system we want to use
     config.active_job.queue_adapter = :sidekiq
 
+    # because when we check for beginning of week it needs to be right
+    config.time_zone = "Central Time (US & Canada)"
+    
+    # add the fonts into the pipeline
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
   end
 end
