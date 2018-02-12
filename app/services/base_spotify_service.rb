@@ -12,5 +12,11 @@ class BaseSpotifyService
     end
   end
 
-  attr_reader :spotify_user
+  attr_reader :spotify_user, :response
+
+  private
+  def fail!(msg: )
+    @response.message = msg
+    return @response
+  end
 end

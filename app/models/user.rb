@@ -25,4 +25,8 @@ class User < ApplicationRecord
   def has_discover_weekly?
     self.discover_weekly_id.present?
   end
+
+  def image_url
+    info["image"]
+  end
 end

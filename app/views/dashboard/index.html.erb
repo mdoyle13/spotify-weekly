@@ -1,9 +1,3 @@
-<br>
-welcome to your dashboard
-
-<br>
-
-<br>
 <% if current_user.has_discover_weekly? %>
     We have your discover weekly playlist: <%= current_user.discover_weekly_id %>
     <br>
@@ -13,8 +7,9 @@ welcome to your dashboard
 <% end %>
 
 
-<ul>
+
 <% @playlists.each do |pl| %>
+<ul>
     <li><%= pl.name %> | <%= link_to 'delete', playlist_path(pl), method: :delete, data: { confirm: 'Are you sure?' } %>
         
         | <%= link_to "restore to spotify", restore_to_spotify_playlist_path(pl), method: :post %>
@@ -24,5 +19,5 @@ welcome to your dashboard
             <li><%= track.formatted_artist_name %> - <%= track.name %></li>
         <% end %>
     </ul>
-<% end %>
 </ul>
+<% end %>

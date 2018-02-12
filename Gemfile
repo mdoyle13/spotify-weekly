@@ -13,7 +13,8 @@ gem 'pg', '~> 0.18'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+#gem 'sass-rails', '~> 5.0'
+gem 'sassc-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
@@ -45,6 +46,9 @@ gem 'rspotify', github: "guilhermesad/rspotify"
 # process background jobs
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
+
+gem 'bootstrap', '~> 4.0.0'
+gem 'jquery-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

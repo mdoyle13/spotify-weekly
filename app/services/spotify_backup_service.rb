@@ -10,16 +10,14 @@ class SpotifyBackupService < BaseSpotifyService
       
       # if its not there for some reason we cannot proceed
       unless @spotify_playlist
-        @response.message = "You need to follow the discover weekly playlist :("
-        return @response
+        return fail! msg: "You need to follow the discover weekly playlist :("
       end
 
       db_playlist = @user_record.playlists.new
 
       # check this so we dont proceed if they playlist is invalid
       unless db_playlist.valid?
-         @response.message = db_playlist.errors.full_messages.to_sentence
-         return @response
+         return fail! msg: db_playlist.errors.full_messages.to_sentence
       end
 
       # create the playlist on spotify and pass it the name
@@ -27,8 +25,7 @@ class SpotifyBackupService < BaseSpotifyService
       remote_playlist = create_playlist_on_spotify(name)
 
       unless remote_playlist
-        @response.message = "Couldn't create the playlist on Spotify. Please try again later"
-        return @response
+        return fail! msg: "Couldn't create the playlist on Spotify. Please try again later"
       end
 
       # playlist has saved to user's spotify account, now store it in the database
@@ -39,8 +36,7 @@ class SpotifyBackupService < BaseSpotifyService
       end
 
       unless db_playlist.save
-        @response.message = db_playlist.errors.full_messages.to_sentence
-        return @response
+        return fail! msg: db_playlist.errors.full_messages.to_sentence
       end
 
       # reverse the tracks so they are created in the same order as on spotify?
