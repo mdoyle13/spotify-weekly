@@ -222,6 +222,8 @@ GEM
     selenium-webdriver (3.8.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
+    sentry-raven (2.7.2)
+      faraday (>= 0.7.6, < 1.0)
     sidekiq (5.1.0)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -291,6 +293,7 @@ DEPENDENCIES
   rspotify!
   sassc-rails
   selenium-webdriver
+  sentry-raven
   sidekiq
   sidekiq-scheduler
   spring
