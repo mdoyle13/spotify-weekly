@@ -21,8 +21,7 @@ Rails.application.routes.draw do
   
 
   resources :playlists, only: [:show, :destroy] do
-    post 'retrieve_discover_weekly', on: :collection
-    post 'sync_discover_weekly', on: :collection
+    post 'initial_discover_weekly_sync', on: :collection
     member do
       post 'restore_to_spotify'
     end

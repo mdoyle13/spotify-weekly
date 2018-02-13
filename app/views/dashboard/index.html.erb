@@ -4,7 +4,7 @@
       <p class="lead">Click the button below and we'll connect to your spotify account and start backing up your Discover Weekly playlists automatically, <strong>every single week.</strong></p>
       <hr class="my-4">
       <p class="lead">
-        <%= button_to "Start Discover Weekly Sync", retrieve_discover_weekly_playlists_path, class: "btn btn-success btn-lg", role: "button" %>
+        <%= button_to "Start Discover Weekly Sync", initial_discover_weekly_sync_playlists_path, class: "btn btn-success btn-lg", role: "button" %>
       </p>
     </div>
 <% end %>
@@ -30,7 +30,7 @@
   </tbody>
 </table>
 <% end %>
-<!--  <%= button_to "Back up this week's playlist", sync_discover_weekly_playlists_path %> -->
+
 <% if current_user.has_discover_weekly? %>
   Discover Weekly Playlist ID:<strong><%= current_user.discover_weekly_id %></strong>
 <% end %>

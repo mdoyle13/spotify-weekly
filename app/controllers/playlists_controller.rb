@@ -31,23 +31,30 @@ class PlaylistsController < ApplicationController
     redirect_to dashboard_path
   end
 
-  def retrieve_discover_weekly
-    # this method will be called when a user needs to manually attach the weekly id
-
-    @spotify_weekly_playlist_service = SpotifyWeeklyPlaylistService.new(current_user).call
+  def initial_discover_weekly_sync
+    # get the playlist
+    get_weekly_playlist = SpotifyWeeklyPlaylistService.new(current_user).call
     
-    if @spotify_weekly_playlist_service.success?
-      current_user.discover_weekly_id = @spotify_weekly_playlist_service.playlist.id
-      current_user.save
-
-      # TODO: Don't do this like this. its gross.
-      return sync_discover_weekly
+    if get_weekly_playlist.success?
+      current_user.update_attributes(discover_weekly_id: get_weekly_playlist.playlist.id)
     else
       flash[:error] = @spotify_weekly_playlist_service.message
+      return redirect_to dashboard_path
     end
 
-    redirect_to dashboard_path
+    # backup the playlist
+    spotify_backup = SpotifyBackupService.new(current_user).call
+
+    if spotify_backup.success?
+      flash[:notice] = spotify_backup.message
+    else
+      flash[:error] = spotify_backup.message
+      return redirect_to dashboard_path
+    end
+
+    return redirect_to dashboard_path
   end
+
 
   def sync_discover_weekly
     @spotify_service = SpotifyBackupService.new(current_user).call
