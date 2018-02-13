@@ -1,0 +1,18 @@
+<div class="d-flex align-items-center justify-content-between mb-4">
+  <h3><%= @playlist.name %></h3>
+  <div class="btn-group" role="group">
+    <%= link_to "Restore to Spotify", restore_to_spotify_playlist_path(@playlist), method: :post, class: "btn btn-info btn-sm" %>
+    <%= link_to 'Delete', playlist_path(@playlist), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
+  </div>
+</div>
+
+<table class="table table-striped">
+  <tbody>
+    <% @tracks.each do |track| %>
+    <tr>
+      <td><%= track.formatted_artist_name %></td>
+      <td><%= track.name %></td>
+    </tr>
+    <% end -%>
+  </tbody>
+</table>

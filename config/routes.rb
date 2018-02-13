@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
   mount Sidekiq::Web, at: "/sidekiq"
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: "sessions" }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'pages#home'
   
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'dashboard#index'
   
 
-  resources :playlists, only: [:destroy] do
+  resources :playlists, only: [:show, :destroy] do
     post 'retrieve_discover_weekly', on: :collection
     post 'sync_discover_weekly', on: :collection
     member do

@@ -1,6 +1,10 @@
 class PlaylistsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_playlist, only: [:destroy, :restore_to_spotify]
+  before_action :load_playlist, only: [:show, :destroy, :restore_to_spotify]
+
+  def show
+    @tracks = @playlist.tracks.order('id ASC')
+  end
 
   def destroy
     if @playlist.destroy
@@ -35,6 +39,9 @@ class PlaylistsController < ApplicationController
     if @spotify_weekly_playlist_service.success?
       current_user.discover_weekly_id = @spotify_weekly_playlist_service.playlist.id
       current_user.save
+
+      # TODO: Don't do this like this. its gross.
+      return sync_discover_weekly
     else
       flash[:error] = @spotify_weekly_playlist_service.message
     end
@@ -56,6 +63,7 @@ class PlaylistsController < ApplicationController
 
   private
   def load_playlist
-    @playlist = Playlist.find(params[:id])
+    @playlist = current_user.playlists.where(id: params[:id]).first
+    return not_found unless @playlist
   end
 end
