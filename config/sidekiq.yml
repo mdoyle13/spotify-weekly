@@ -1,5 +1,5 @@
 :concurrency: 2
 :schedule:
-  test_job:
-    cron: '23 0 * * MON'
+  backup_queuer:
+    cron: '23 0 * * 1'
     class: BackupQueuerJob
