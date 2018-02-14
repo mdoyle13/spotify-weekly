@@ -5,7 +5,7 @@ class SpotifyWeeklyPlaylistService < BaseSpotifyService
       @response.send("success?=", true)
       @response.playlist = playlist
     else
-      @response.message = "You're not following discover weekly"
+      @response.message = "You are not following Discover Wekly. Once you do that come back and try again"
     end
     @response
   end

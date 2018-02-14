@@ -38,7 +38,7 @@ class PlaylistsController < ApplicationController
     if get_weekly_playlist.success?
       current_user.update_attributes(discover_weekly_id: get_weekly_playlist.playlist.id)
     else
-      flash[:error] = @spotify_weekly_playlist_service.message
+      flash[:error] = get_weekly_playlist.message
       return redirect_to dashboard_path
     end
 
