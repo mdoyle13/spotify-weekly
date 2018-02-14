@@ -1,9 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  spotify_id: MyString
+  name: Discover Weekly Backup (02-12-18)
+  spotify_id: 12345678
+  user: one
+  week_of: <%= Time.zone.now.to_date.at_beginning_of_week %>
 
-two:
-  name: MyString
-  spotify_id: MyString
+# two:
+#   name: Discover Weekly Backup (02-05-18)
+#   spotify_id: 987654321
+#   user: one

@@ -9,20 +9,20 @@ class Playlist < ApplicationRecord
     self.week_of = Time.zone.now.to_date.at_beginning_of_week
   end
 
-  def get_week_of
-     Time.zone.now.to_date.at_beginning_of_week
-  end
-
   def week_of_name
     date_string = Time.zone.now.to_date.at_beginning_of_week.strftime("%m-%d-%y")
     "Discover Weekly Backup (#{date_string})"
   end
 
   private
+  def get_week_of
+     Time.zone.now.to_date.at_beginning_of_week
+  end
+
   def user_id_and_week_of_is_unique
     if Playlist.where(user_id: self.user_id, week_of: get_week_of).present?
-        errors.add(:base, "already backed up your discover weekly this week. 
-            you can restore it to spotify if you need to")
+        errors.add(:base, "Already backed up your discover weekly this week. 
+            you can restore it to spotify if you need to though.")
     end
   end
 end

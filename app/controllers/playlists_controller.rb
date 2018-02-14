@@ -18,7 +18,6 @@ class PlaylistsController < ApplicationController
 
   def restore_to_spotify
     spotify_service = BaseSpotifyService.new(current_user)
-    
     spotify_user = spotify_service.spotify_user
 
     db_tracks = @playlist.tracks.order('id ASC').collect(&:spotify_id)
@@ -28,6 +27,7 @@ class PlaylistsController < ApplicationController
     
     playlist.add_tracks!(spotify_tracks)
 
+    flash[:notice] = "Successfully restored playlist to Spotify"
     redirect_to dashboard_path
   end
 
