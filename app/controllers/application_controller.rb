@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+
+  http_basic_authenticate_with name: ENV['BASIC_USERNAME'], password: ENV['BASIC_PW'], except: :index
   protect_from_forgery with: :exception
   
   def not_found
