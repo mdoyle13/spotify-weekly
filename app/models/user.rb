@@ -26,6 +26,10 @@ class User < ApplicationRecord
     self.discover_weekly_id.present?
   end
 
+  def has_backups?
+    playlists.present?
+  end
+
   def image_url
     info["image"]
   end

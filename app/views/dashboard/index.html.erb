@@ -9,28 +9,35 @@
     </div>
 <% end %>
 
-
-<% if current_user.has_discover_weekly? %>
-<h2>Your Backups</h2>
-
-<table class="table table-striped">
-  <tbody>
-    <% @playlists.each do |pl| %>
-    <tr>
-      <td><%= pl.week_of.strftime(" %B %d, %Y") %><span class="ml-2 badge badge-primary"><%= pl.tracks.count %> tracks</span></td>
-      <td align="right">
-        <div class="btn-group " role="group">
-          <%= link_to "View Tracks", playlist_path(pl), class: "btn btn-primary btn-sm" %>
-          <%= link_to "Restore to Spotify", restore_to_spotify_playlist_path(pl), method: :post, class: "btn btn-info btn-sm" %>
-          <%= link_to 'Delete', playlist_path(pl), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
-        </div>
-      </td>
-    </tr>
-    <% end -%>
-  </tbody>
-</table>
+<% if current_user.has_discover_weekly? and current_user.has_backups? %>
+  <h2>Your Backups</h2>
+  <table class="table table-striped">
+    <tbody>
+      <% @playlists.each do |pl| %>
+      <tr>
+        <td>
+          <%= pl.week_of.strftime(" %B %d, %Y") %><span class="ml-2 badge badge-primary"><%= pl.tracks.count %> tracks</span></td>
+        <td align="right">
+          <div class="btn-group " role="group">
+            <%= link_to "View Tracks", playlist_path(pl), class: "btn btn-primary btn-sm" %>
+            <%= link_to "Restore to Spotify", restore_to_spotify_playlist_path(pl), method: :post, class: "btn btn-info btn-sm" %>
+            <%= link_to 'Delete', playlist_path(pl), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
+          </div>
+        </td>
+      </tr>
+      <% end -%>
+    </tbody>
+  </table>
+<% else %>
+    <div class="jumbotron">
+      <p class="lead">It looks like we have your Discover Weekly playlist ID but you don't have any backups.</p>
+      <hr class="my-4">
+      <p class="lead">
+        <%= button_to "Backup Now", sync_discover_weekly_playlists_path, class: "btn btn-success btn-lg", role: "button" %>
+      </p>
+    </div>
 <% end %>
-
+<!-- 
 <% if current_user.has_discover_weekly? %>
   Discover Weekly Playlist ID:<strong><%= current_user.discover_weekly_id %></strong>
-<% end %>
+<% end %> -->
