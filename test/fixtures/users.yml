@@ -8,4 +8,17 @@ one:
   email: doyle@doyle.com
   provider: "spotify"
   uid: "mdoyle3200"
+  discover_weekly_id: "12345678910"
+  auth_hash: {}
+
+no_weekly:
+  email: noweekly@site.com
+  provider: "spotify"
+  discover_weekly_id: 
+  auth_hash: {}
+
+no_backups:
+  email: noplaylists@site.com
+  provider: "spotify"
+  discover_weekly_id:
   auth_hash: {}
