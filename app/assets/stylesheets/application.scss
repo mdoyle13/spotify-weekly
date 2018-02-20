@@ -60,7 +60,7 @@ body {
   display: table;
   font-size: 1.5em;
   margin: 0 auto;
-  padding: 1em 2em;
+  padding: 0.75em 2em;
   text-decoration: none;
   text-transform: uppercase;
   transition: all 0.2s;
@@ -80,7 +80,8 @@ body {
   }
 }
 
-
+// stop the dropdown of the profile nav from overflowing
+// to the right of the screen
 .profile-nav .dropdown-menu.show {
   left: auto;
   right: 0;
@@ -99,6 +100,19 @@ body {
   background-position: center center;
   background-size: cover;
 }
+
+@include media-breakpoint-down(md) {
+  .profile-nav {
+    display: block;
+  }
+
+  .profile-nav .dropdown-menu.show {
+    display: block;
+    float: none;
+    position: static;
+  }
+}
+
 
 .flash-message-wrapper {
   margin: 2em 0;
