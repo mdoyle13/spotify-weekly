@@ -27,7 +27,7 @@ class User < ApplicationRecord
   end
 
   def has_backups?
-    playlists.present?
+    playlists.count > 0
   end
 
   def image_url
