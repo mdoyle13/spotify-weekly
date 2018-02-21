@@ -1,22 +1,20 @@
 class BaseSpotifyService
-    def initialize(user)
+  attr_accessor :spotify_user, :user_record, :response
+
+  def initialize(user)
     @user_record = user
     @response = OpenStruct.new(success?: false, message: nil)
-
-    # try to oauth with spotify
-    begin
-      @spotify_user = RSpotify::User.new(user.auth_hash)
-    rescue
-      @response.message = "there was a problem authenticating with spotify please try again later"
-      return @response
-    end
   end
 
-  attr_reader :spotify_user, :response
+  def call
+    # returns a spotify user object
+    @spotify_user = RSpotify::User.new(user_record.auth_hash)
+  end
 
   private
+
   def fail!(msg: )
-    @response.message = msg
-    return @response
+    response.message = msg
+    return response
   end
 end

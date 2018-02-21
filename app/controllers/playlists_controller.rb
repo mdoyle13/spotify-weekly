@@ -17,8 +17,8 @@ class PlaylistsController < ApplicationController
   end
 
   def restore_to_spotify
-    spotify_service = BaseSpotifyService.new(current_user)
-    spotify_user = spotify_service.spotify_user
+    spotify_user = BaseSpotifyService.new(current_user).call
+    #returns a spotify user
 
     db_tracks = @playlist.tracks.order('id ASC').collect(&:spotify_id)
     spotify_tracks = RSpotify::Track.find(db_tracks)
