@@ -254,7 +254,8 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :spotify, ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_CLIENT_SECRET'],
-    scope: 'playlist-read-private user-read-private user-read-email, playlist-modify-public'
+    scope: 'playlist-read-private user-read-private user-read-email, playlist-modify-public',
+    client_options: { redirect_uri: ENV['SPOTIFY_REDIRECT_URI'] }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
