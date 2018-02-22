@@ -160,6 +160,8 @@ GEM
     public_suffix (3.0.1)
     puma (3.11.2)
     rack (2.0.3)
+    rack-mini-profiler (0.10.7)
+      rack (>= 1.2.0)
     rack-protection (2.0.0)
       rack
     rack-test (0.8.2)
@@ -289,6 +291,7 @@ DEPENDENCIES
   omniauth-spotify!
   pg (~> 0.18)
   puma (~> 3.7)
+  rack-mini-profiler
   rails (~> 5.1.4)
   rspotify!
   sassc-rails
