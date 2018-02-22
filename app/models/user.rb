@@ -22,6 +22,10 @@ class User < ApplicationRecord
     record
   end
 
+  def has_this_week_backup?
+    !playlists.new.valid?
+  end
+
   def has_discover_weekly?
     self.discover_weekly_id.present?
   end

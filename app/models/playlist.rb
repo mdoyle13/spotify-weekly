@@ -9,20 +9,36 @@ class Playlist < ApplicationRecord
     self.week_of = Time.zone.now.to_date.at_beginning_of_week
   end
 
+  def self.this_week_backup_name
+    date_string = Time.zone.now.to_date.at_beginning_of_week.strftime("%m-%d-%y")
+    "Discover Weekly Backup (#{date_string})"
+  end
+
   def week_of_name
     date_string = Time.zone.now.to_date.at_beginning_of_week.strftime("%m-%d-%y")
     "Discover Weekly Backup (#{date_string})"
   end
 
-  private
-  def get_week_of
-     Time.zone.now.to_date.at_beginning_of_week
+  def update_with_spotify(spotify_playlist)
+    self.tap do |pl|
+      pl.name = self.class.this_week_backup_name
+      pl.spotify_id = spotify_playlist.id
+      pl.data = spotify_playlist
+    end
+
+    self.save
+    self
   end
 
-  def user_id_and_week_of_is_unique
-    if Playlist.where(user_id: self.user_id, week_of: get_week_of).present?
-        errors.add(:base, "Already backed up your discover weekly this week. 
-            you can restore it to spotify if you need to though.")
+  private
+    def get_week_of
+       Time.zone.now.to_date.at_beginning_of_week
     end
-  end
+
+    def user_id_and_week_of_is_unique
+      if Playlist.where(user_id: self.user_id, week_of: get_week_of).present?
+          errors.add(:base, "Already backed up your discover weekly this week. 
+              you can restore it to spotify if you need to though.")
+      end
+    end
 end

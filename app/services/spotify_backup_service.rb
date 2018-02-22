@@ -1,12 +1,12 @@
 class SpotifyBackupService < BaseSpotifyService
-    attr_accessor :spotify_playlist, :name
+  attr_accessor :spotify_playlist, :name
 
-    def call
-      super
-      sync_discover_weekly
-    end
-    
-    private
+  def call
+    super
+    sync_discover_weekly
+  end
+  
+  private
     def sync_discover_weekly
       # get the users weekly playlist from spotify
       @spotify_playlist = get_discover_weekly
@@ -16,15 +16,13 @@ class SpotifyBackupService < BaseSpotifyService
         return fail! msg: "You need to follow the discover weekly playlist :("
       end
 
-      db_playlist = user_record.playlists.new
-
       # check this so we dont proceed if they playlist is invalid
-      unless db_playlist.valid?
-         return fail! msg: db_playlist.errors.full_messages.to_sentence
+      if user_record.has_this_week_backup?
+         return fail! msg: "It appears you already have a backup for this week"
       end
 
       # create the playlist on spotify and pass it the name
-      @name = db_playlist.week_of_name
+      @name = Playlist.this_week_backup_name
       remote_playlist = create_playlist_on_spotify( name )
 
       unless remote_playlist
@@ -32,13 +30,9 @@ class SpotifyBackupService < BaseSpotifyService
       end
 
       # playlist has saved to user's spotify account, now store it in the database
-      db_playlist.tap do |pl|
-          pl.name = name
-          pl.spotify_id = remote_playlist.id
-          pl.data = remote_playlist
-      end
+      db_playlist = user_record.playlists.new.update_with_spotify(remote_playlist)
 
-      unless db_playlist.save
+      unless db_playlist.persisted?
         return fail! msg: db_playlist.errors.full_messages.to_sentence
       end
 
