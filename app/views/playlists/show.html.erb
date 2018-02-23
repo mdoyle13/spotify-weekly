@@ -11,10 +11,17 @@
 </div>
 
 <table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Song Link</th>
+      <th>Artist(s)</th>
+      <th>Track Title</th>
+    </tr>
+  </thead>
   <tbody>
     <% @tracks.each do |track| %>
     <tr>
-      <td><%= track_embed(track) %></td>
+      <td><%= track_image_tag(track) %></td>
       <td><%= track.formatted_artist_name %></td>
       <td><%= track.name %></td>
     </tr>

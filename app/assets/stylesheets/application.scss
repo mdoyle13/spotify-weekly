@@ -2,6 +2,7 @@
 @import "icomoon";
 
 $spotify-green: #21D05F;
+$nav-link-color: rgba(0, 0, 0, 0.5);
 
 * {
   box-sizing: border-box;
@@ -80,6 +81,14 @@ body {
   }
 }
 
+.nav-link {
+  color: $nav-link-color;
+  
+  &:hover {
+    color: rgba($nav-link-color, 0.7);
+  }
+}
+
 // stop the dropdown of the profile nav from overflowing
 // to the right of the screen
 .profile-nav .dropdown-menu.show {
@@ -102,6 +111,11 @@ body {
 }
 
 @include media-breakpoint-down(md) {
+  .home-hero {
+    font-size: 0.8em;
+    padding-top: 100px;
+  }
+
   .profile-nav {
     display: block;
   }
@@ -110,6 +124,14 @@ body {
     display: block;
     float: none;
     position: static;
+  }
+
+  .profile-nav__user-image {
+    display: none !important;
+  }
+
+  #navbarDropdownMenuLink {
+    padding-left: 0;
   }
 }
 

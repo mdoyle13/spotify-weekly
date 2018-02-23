@@ -4,7 +4,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :omniauthable, :trackable, :timeoutable
   store_accessor :auth_hash, :info
-      
+  validates :email, uniqueness: true
+
   def self.from_omniauth(auth)
     # find or create the record
     record = where(email: auth.info.email).first_or_create

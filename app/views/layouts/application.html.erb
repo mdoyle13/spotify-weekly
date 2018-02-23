@@ -21,7 +21,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/dashboard">Manage Backups <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/dashboard">Backups <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/help">Help</a>
@@ -31,11 +31,10 @@
             <div class="nav-item dropdown profile-nav">
               <div class="profile-nav__user-image d-inline-block" style="background-image:url('<%= current_user.image_url %>')"></div>
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Profile
+                My Account
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Edit Account</a>
-                <a class="dropdown-item" href="#">Delete Account</a>
+                <%= link_to "Edit Account", edit_user_path(current_user), class: "dropdown-item" %>
                 <div class="dropdown-divider"></div>
                 <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "dropdown-item") %>
               </div>
@@ -47,25 +46,8 @@
     </nav>
 
     <div class="container-fluid">
-      
-      <div class="flash-message-wrapper">
-        <% if flash[:notice] %>
-        <div class="alert alert-success alert-dismissable" role="alert">
-          <%= flash[:notice] %>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      <% end %>
-
-      <% if flash[:error] %>
-        <div class="alert alert-danger alert-dismissable" role="alert">
-          <%= flash[:error] %>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      <% end %>
+    <div class="flash-message-wrapper">
+      <%= render "partials/flash_messages" %>
     </div>
     
     <%= yield %>

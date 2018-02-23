@@ -42,7 +42,7 @@ class SpotifyBackupService < BaseSpotifyService
       end
 
       response.send("success?=", true)
-      response.message = "Huzzah - We have your Discover Weekly playlist. It will now be backed up every week, automatically"
+      response.message = "Huzzah - Your Discover Weekly playlist for this week is backed up. It will now be backed up every week, automatically"
       return response
   end
 

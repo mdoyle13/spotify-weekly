@@ -19,6 +19,10 @@ Rails.application.routes.draw do
   get '/auth/spotify/callback', to: 'users#spotify'
   get 'dashboard', to: 'dashboard#index'
   
+  # help page
+  get '/help', to: 'pages#help'
+
+  resources :users, only: [:edit, :update]
 
   resources :playlists, only: [:show, :destroy] do
     post 'initial_discover_weekly_sync', on: :collection

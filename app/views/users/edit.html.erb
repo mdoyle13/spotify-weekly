@@ -1,0 +1,23 @@
+<% content_for :title do %>
+  ReDiscover Weekly | Edit Account
+<% end %>
+
+<h2>Edit User Information</h2>
+<p>
+  You can edit your email address and decide if you'd like to continue to have your playlists backedup automatically.
+</p>
+<div class="row">
+  <div class="col-6">
+    <%= form_for @user, remote: true do |f| %>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.text_field :email, class: "form-control" %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :auto_sync, class: "form-check-input" %>
+        <%= f.label :auto_sync, "Automatic Weekly Backup?" %>
+      </div>
+      <%= f.submit "Save", class: "btn btn-primary" %>
+    <% end %>  
+  </div>
+</div>
