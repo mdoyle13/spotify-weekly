@@ -1,0 +1,81 @@
+@import "icomoon";
+
+$spotify-green: #21D05F;
+$nav-link-color: rgba(0, 0, 0, 0.5);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto';
+  margin: 0;
+  padding: 0;
+}
+
+// .icon {
+//   display: inline-block;
+//   width: 1em;
+//   height: 1em;
+//   stroke-width: 0;
+//   stroke: currentColor;
+//   fill: currentColor;
+// }
+
+.home-hero {
+  background-image: image-url("home-hero-bg.jpg");
+  background-size: cover;
+  color: #fff;
+  height: 100vh;
+  overflow: auto;
+  padding: 200px 0 0 0;
+
+  h1 {
+    font-size: 5.5em;
+    font-weight: 300;
+    margin-bottom: 0.5em;
+  }
+
+  h1, p {
+    text-align: center;
+  }
+
+  h1 strong {
+    font-weight: 700;
+  }
+
+  p {
+    font-weight: 100;
+    font-size: 1.33em;
+    letter-spacing: 6px;
+    margin-bottom: 2em;
+    text-transform: uppercase;
+  }
+}
+
+.home-hero__spotify-button {
+  background: darken($spotify-green, 15);
+  border-radius: 50px;
+  color: #fff;
+  display: table;
+  font-size: 1.5em;
+  margin: 0 auto;
+  padding: 0.75em 2em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  
+  &:hover {
+    background: $spotify-green;
+    color: inherit;
+    padding-left: 2.5em;
+    padding-right: 2.5em;
+    text-decoration: none;
+  }
+
+  &:active {
+    position: relative;
+    top: 2px;
+    right: -2px;
+  }
+}
