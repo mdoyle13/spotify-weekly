@@ -68,6 +68,12 @@ body {
   }
 }
 
+@include media-breakpoint-down(xs) {
+  .backups-list-table__buton-group {
+    flex-direction: column;
+  }
+}
+
 .flash-message-wrapper {
   margin: 2em 0;
 }
