@@ -3,7 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+        <!-- Search Engine -->
+    <meta name="description" content="Automatic Backup of All Your Spotify Discover Weekly Playlists">
+    <meta name="image" content="<%= image_url "share.jpg" %>">
+    <!-- Schema.org for Google -->
+    <meta itemprop="name" content="ReDiscover Weekly">
+    <meta itemprop="description" content="Automatic Backup of All Your Spotify Discover Weekly Playlists">
+    <meta itemprop="image" content="<%= image_url "share.jpg" %>">
+    <!-- Open Graph general (Facebook, Pinterest & Google+) -->
+    <meta name="og:title" content="ReDiscover Weekly">
+    <meta name="og:description" content="Automatic Backup of All Your Spotify Discover Weekly Playlists">
+    <meta name="og:type" content="website">
     <title><%= content_for?(:title) ? yield(:title) : "Title" %></title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
     <%= stylesheet_link_tag "homepage" %>
