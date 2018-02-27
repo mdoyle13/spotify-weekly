@@ -86,3 +86,10 @@ body {
     padding-top: 100px;
   }
 }
+
+@media (max-width: 375px) {
+  .home-hero {
+    font-size: 0.65em;
+    padding-top: 80px;
+  }
+}
