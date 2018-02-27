@@ -11,9 +11,12 @@
     <meta itemprop="description" content="Automatic Backup of All Your Spotify Discover Weekly Playlists">
     <meta itemprop="image" content="<%= image_url "share.jpg" %>">
     <!-- Open Graph general (Facebook, Pinterest & Google+) -->
-    <meta name="og:title" content="ReDiscover Weekly">
-    <meta name="og:description" content="Automatic Backup of All Your Spotify Discover Weekly Playlists">
-    <meta name="og:type" content="website">
+    <meta property="og:title" content="Title">
+    <meta property="og:site_name" content="ReDiscover Weekly">
+    <meta property="og:url" content="http://url">
+    <meta property="og:description" content="Automatic Backup of All Your Spotify Discover Weekly Playlists">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="<%= image_url "share.jpg" %>">
     <title><%= content_for?(:title) ? yield(:title) : "Title" %></title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
     <%= stylesheet_link_tag "homepage" %>
