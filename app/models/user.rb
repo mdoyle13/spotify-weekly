@@ -6,6 +6,9 @@ class User < ApplicationRecord
   store_accessor :auth_hash, :info
   validates :email, uniqueness: true
 
+  scope :with_auto_sync_enabled, -> { where(auto_sync: true) }
+  scope :with_discover_weekly, -> { where.not(discover_weekly_id: nil) }
+  
   def self.from_omniauth(auth)
     # find or create the record
     record = where(email: auth.info.email).first_or_create
@@ -23,12 +26,16 @@ class User < ApplicationRecord
     record
   end
 
-  def has_this_week_backup?
-    !playlists.new.valid?
+  def self.for_backup_job
+    with_auto_sync_enabled.with_discover_weekly
   end
 
-  def has_discover_weekly?
+    def has_discover_weekly?
     self.discover_weekly_id.present?
+  end
+
+  def has_this_week_backup?
+    !playlists.new.valid?
   end
 
   def has_backups?
