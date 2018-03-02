@@ -20,7 +20,7 @@
       <% @playlists.each do |pl| %>
       <tr>
         <td>
-          <%= pl.week_of.strftime(" %B %d, %Y") %></td>
+          Week of <%= pl.week_of.strftime(" %B %d, %Y") %></td>
         <td align="right">
           <div class="btn-group backups-list-table__buton-group" role="group">
             <%= link_to "View Tracks", playlist_path(pl), class: "btn btn-primary btn-sm" %>
