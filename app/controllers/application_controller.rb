@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
 
   def redirect_heroku_url
     if request.host == "spotify-weekly.herokuapp.com"
-      redirect_to "#{request.protocol}rediscoverweekly.com#{request.fullpath}", status: :moved_permanently
+      redirect_to "#{request.protocol}www.rediscoverweekly.com#{request.fullpath}", status: :moved_permanently
     end
   end
 end
