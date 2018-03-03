@@ -11,12 +11,7 @@ class Playlist < ApplicationRecord
 
   def self.this_week_backup_name
     date_string = Time.zone.now.to_date.at_beginning_of_week.strftime("%m-%d-%y")
-    "Discover Weekly Backup (#{date_string})"
-  end
-
-  def week_of_name
-    date_string = Time.zone.now.to_date.at_beginning_of_week.strftime("%m-%d-%y")
-    "Discover Weekly Backup (#{date_string})"
+    "ReDiscover Weekly (#{date_string})"
   end
 
   def update_with_spotify(spotify_playlist)
