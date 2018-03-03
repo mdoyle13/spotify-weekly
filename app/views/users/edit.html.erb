@@ -21,3 +21,12 @@
     <% end %>  
   </div>
 </div>
+
+<hr>
+
+<div class="row">
+  <div class="col-6">
+    <h2>Delete your account?</h2>
+    <%= button_to "Delete my account", user_path(@user), method: :delete, data: { confirm: "Are you sure? This can't be undone." }, class: "btn btn-danger" %>
+  </div>
+</div>

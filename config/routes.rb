@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   # help page
   get '/help', to: 'pages#help'
 
-  resources :users, only: [:edit, :update]
+  resources :users, only: [:edit, :update, :destroy]
 
   resources :playlists, only: [:show, :destroy] do
     post 'initial_discover_weekly_sync', on: :collection
