@@ -5,7 +5,8 @@
 <% if !current_user.has_discover_weekly? %>
     <div class="jumbotron">
       <h1 class="display-4">Welcome to <strong>Re</strong>Discover Weekly</h1>
-      <p class="lead">Click the button below and we'll connect to your spotify account and start backing up your Discover Weekly playlists automatically, <strong>every single week.</strong></p>
+      <p class="lead">Click the button below to back up this week's Discover Weekly playlist <strong>AND</strong> to turn on automatic backups for every week in the future.</p>
+      <p><strong>Backups will be pushed directly to your Spotify sidebar and stored on this website incase you need them.</strong></p>
       <hr class="my-4">
       <p class="lead">
         <%= button_to "Start Backing Up Discover Weekly", initial_discover_weekly_sync_playlists_path, class: "btn btn-success btn-lg", role: "button", data: { disable_with: "Hold please..." } %>
