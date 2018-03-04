@@ -47,8 +47,8 @@ class SpotifyBackupService < BaseSpotifyService
   end
 
   def get_discover_weekly
-    # fetch discover weekly from spotify
-    spotify_user.playlists.select {|p| p.name == "Discover Weekly"}[0]
+    # fetch discover weekly from spotify, spotify is the owner of the playlist
+    RSpotify::Playlist.find("spotify", user_record.discover_weekly_id)
   end
 
   def create_playlist_on_spotify(name)
