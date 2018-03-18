@@ -3,6 +3,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     # handle the database part of the auth
     @user = User.from_omniauth(request.env["omniauth.auth"])
+    
+    # stay logged in please
+    @user.remember_me = true
 
     if @user.persisted?
       sign_in_and_redirect @user, event: :authentication

@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_many :playlists, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :omniauthable, :trackable, :timeoutable
+  devise :database_authenticatable, :omniauthable, :trackable, :timeoutable, :rememberable
   store_accessor :auth_hash, :info
   validates :email, uniqueness: true
 
