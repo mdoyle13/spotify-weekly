@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    respond_to :js
+    respond_to :js #only
     if @user.update(user_params)
       flash[:notice] = "Successfully updated your details"
     else

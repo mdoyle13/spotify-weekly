@@ -17,14 +17,11 @@ class PlaylistsController < ApplicationController
   end
 
   def restore_to_spotify
-    spotify_user = BaseSpotifyService.new(current_user).call
-    #returns a spotify user
-
     db_tracks = @playlist.tracks.order('id ASC').collect(&:spotify_id)
     spotify_tracks = RSpotify::Track.find(db_tracks)
-    
+
+    spotify_user = BaseSpotifyService.new(current_user).call
     playlist = spotify_user.create_playlist!(@playlist.name)
-    
     playlist.add_tracks!(spotify_tracks)
 
     flash[:notice] = "Successfully restored playlist to Spotify"
@@ -32,9 +29,9 @@ class PlaylistsController < ApplicationController
   end
 
   def initial_discover_weekly_sync
-    # get the playlist
+    # get the weekly playlist
     get_weekly_playlist = SpotifyWeeklyPlaylistService.new(current_user).call
-    
+
     if get_weekly_playlist.success?
       current_user.update_attributes(discover_weekly_id: get_weekly_playlist.playlist.id)
     else
@@ -64,7 +61,7 @@ class PlaylistsController < ApplicationController
     else
       flash[:error] = @spotify_service.message
     end
-    
+
     redirect_to dashboard_path
   end
 
