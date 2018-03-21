@@ -3,7 +3,7 @@ class Playlist < ApplicationRecord
   has_many :tracks, dependent: :destroy
   validate :user_id_and_week_of_is_unique
 
-  # set the week of date before creating. the week of date is how to tell 
+  # set the week of date before creating. the week of date is how to tell
   # if 'this weeks' discover weekly has been backed up already
   before_create do
     self.week_of = Time.zone.now.to_date.at_beginning_of_week
@@ -16,7 +16,6 @@ class Playlist < ApplicationRecord
 
   def update_with_spotify(spotify_playlist)
     self.tap do |pl|
-      pl.name = self.class.this_week_backup_name
       pl.spotify_id = spotify_playlist.id
       pl.data = spotify_playlist
     end
@@ -32,7 +31,7 @@ class Playlist < ApplicationRecord
 
     def user_id_and_week_of_is_unique
       if Playlist.where(user_id: self.user_id, week_of: get_week_of).present?
-          errors.add(:base, "Already backed up your discover weekly this week. 
+          errors.add(:base, "Already backed up your discover weekly this week.
               you can restore it to spotify if you need to though.")
       end
     end
