@@ -54,18 +54,6 @@ class SpotifyBackupService < BaseSpotifyService
       RSpotify::Playlist.find("spotify", user_record.discover_weekly_id)
     end
 
-<<<<<<< HEAD
-  def create_playlist_on_spotify
-    playlist = spotify_user.create_playlist!(playlist_name)
-    playlist.add_tracks!(spotify_playlist.tracks)
-
-    unless playlist
-      return fail! msg: "Couldn't create the playlist on Spotify. Please try again later"
-    end
-
-    playlist
-  end
-=======
     def create_playlist_on_spotify
       playlist = spotify_user.create_playlist!(playlist_name)
       playlist.add_tracks!(spotify_playlist.tracks)
@@ -76,5 +64,5 @@ class SpotifyBackupService < BaseSpotifyService
 
       playlist
     end
->>>>>>> master
+
 end
