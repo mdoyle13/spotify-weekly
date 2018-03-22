@@ -12,12 +12,12 @@ class ApplicationController < ActionController::Base
   def error
     respond_to do |format|
       format.html { render :file => "#{Rails.root}/public/500", :layout => false, :status => :error }
-      format.any { head :not_found }
+      format.any { head :error }
     end
   end
 
   protected
-  
+
   def after_sign_in_path_for(resource)
     dashboard_path
   end

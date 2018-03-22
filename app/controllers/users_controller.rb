@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_user, only: [:edit, :update, :destroy]
-  before_action :ensure_user_is_current, only: [:edit, :update, :destroy]
+  before_action :load_user, only: [:update, :destroy]
+  before_action :ensure_user_is_current, only: [:update, :destroy]
   after_action -> { flash.discard }, if: -> { request.xhr? }
 
   def edit
+    @user = current_user
   end
 
   def update
@@ -36,6 +37,6 @@ class UsersController < ApplicationController
   end
 
   def ensure_user_is_current
-    return not_found unless @user == current_user
+    return error unless @user == current_user
   end
 end

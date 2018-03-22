@@ -9,24 +9,28 @@ Rails.application.routes.draw do
     ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(username), ::Digest::SHA256.hexdigest(ENV["SIDEKIQ_USERNAME"])) &
     ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(password), ::Digest::SHA256.hexdigest(ENV["SIDEKIQ_PASSWORD"]))
   end
+
   mount Sidekiq::Web, at: "/sidekiq"
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: "sessions" }
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'pages#home'
-  
+
   # spotify auth callback
   get '/auth/spotify/callback', to: 'users#spotify'
   get 'dashboard', to: 'dashboard#index'
-  
+
   # help page
   get '/help', to: 'pages#help'
 
-  resources :users, only: [:edit, :update, :destroy]
+  resources :users, only: [:update, :destroy]
+
+  get 'edit_account', to: 'users#edit', as: 'edit_user'
 
   resources :playlists, only: [:show, :destroy] do
     post 'initial_discover_weekly_sync', on: :collection
-    
+
     collection do
       post 'sync_discover_weekly'
     end

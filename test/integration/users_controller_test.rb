@@ -3,7 +3,14 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "users cannot edit other users" do
     sign_in users(:two)
-    get edit_user_path(users(:one))
-    assert_response :not_found
+    # try to update a different user, user 1
+    put user_path(users(:one)), params: { user: {email: "changeme@aol.com"}, format: 'js' }
+    assert_response :error
+  end
+
+  test "users can edit themselves" do
+    sign_in users(:one)
+    put user_path(users(:one)), params: { user: {email: "changeme@aol.com"}, format: 'js' }
+    assert_response :success
   end
 end

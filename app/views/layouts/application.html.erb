@@ -43,7 +43,7 @@
                 My Account
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <%= link_to "Edit Account", edit_user_path(current_user), class: "dropdown-item" %>
+                <%= link_to "Edit Account", edit_user_path, class: "dropdown-item" %>
                 <div class="dropdown-divider"></div>
                 <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "dropdown-item") %>
               </div>
@@ -58,7 +58,7 @@
     <div class="flash-message-wrapper">
       <%= render "shared/flash_messages" %>
     </div>
-    
+
     <%= yield %>
   </body>
 </html>
