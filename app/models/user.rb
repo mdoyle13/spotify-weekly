@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   scope :with_auto_sync_enabled, -> { where(auto_sync: true) }
   scope :with_discover_weekly, -> { where.not(discover_weekly_id: nil) }
-  
+
   def self.from_omniauth(auth)
     # find or create the record
     record = where(email: auth.info.email).first_or_create
@@ -27,7 +27,7 @@ class User < ApplicationRecord
   end
 
   def self.for_backup_job
-    with_auto_sync_enabled.with_discover_weekly
+    with_discover_weekly
   end
 
     def has_discover_weekly?

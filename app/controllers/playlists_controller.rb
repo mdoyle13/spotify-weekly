@@ -21,8 +21,11 @@ class PlaylistsController < ApplicationController
     spotify_tracks = RSpotify::Track.find(db_tracks)
 
     spotify_user = BaseSpotifyService.new(current_user).call
-    playlist = spotify_user.create_playlist!(@playlist.name)
-    playlist.add_tracks!(spotify_tracks)
+    spotify_playlist = spotify_user.create_playlist!(@playlist.name)
+    spotify_playlist.add_tracks!(spotify_tracks)
+
+    #update with the spotify specific data
+    @playlist.update_with_spotify(spotify_playlist)
 
     flash[:notice] = "Successfully restored playlist to Spotify"
     redirect_to dashboard_path
