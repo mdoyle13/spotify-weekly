@@ -36,6 +36,6 @@ class UsersController < ApplicationController
   end
 
   def ensure_user_is_current
-    return error unless @user == current_user
+    return not_found unless @user == current_user
   end
 end
