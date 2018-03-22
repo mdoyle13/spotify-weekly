@@ -22,6 +22,7 @@ gem 'webpacker', '~> 3.2'
 # fix security vulnerability in loofah version 2.1.1
 gem 'loofah', '= 2.2.1'
 
+gem 'activerecord-import', require: false
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

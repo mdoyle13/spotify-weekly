@@ -1,5 +1,7 @@
-class SpotifyBackupService < BaseSpotifyService
+require 'activerecord-import/base'
+require 'activerecord-import/active_record/adapters/postgresql_adapter'
 
+class SpotifyBackupService < BaseSpotifyService
   def call
     super
     sync_discover_weekly
@@ -35,10 +37,12 @@ class SpotifyBackupService < BaseSpotifyService
         return fail! msg: db_playlist.errors.full_messages.to_sentence
       end
 
-      # reverse the tracks so they are created in the same order as on spotify?
+      tracks_array = []
       @spotify_playlist.tracks.each do |track|
-         db_playlist.tracks.create(spotify_id: track.id, data: track)
+        tracks_array << db_playlist.tracks.build(spotify_id: track.id, data: track)
       end
+
+      Track.import tracks_array, validate: true
 
       response.send("success?=", true)
       response.message = "Huzzah - Your Discover Weekly playlist for this week is backed up."
