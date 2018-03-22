@@ -43,6 +43,6 @@ class User < ApplicationRecord
   end
 
   def image_url
-    info["image"]
+    info["image"] rescue nil
   end
 end

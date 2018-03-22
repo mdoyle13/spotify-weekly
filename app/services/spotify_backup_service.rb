@@ -14,12 +14,14 @@ class SpotifyBackupService < BaseSpotifyService
 
       # if its not there for some reason we cannot proceed
       unless spotify_playlist
+        puts "no spotify playlist"
         return fail! msg: "You need to follow the discover weekly playlist :("
       end
 
       # check this so we dont proceed if they playlist is invalid
       if user_record.has_this_week_backup?
-         return fail! msg: "It appears you already have a backup for this week"
+        puts "no backup"
+        return fail! msg: "It appears you already have a backup for this week"
       end
 
       # if the user has auto_sync on
@@ -44,13 +46,15 @@ class SpotifyBackupService < BaseSpotifyService
       response.send("success?=", true)
       response.message = "Huzzah - Your Discover Weekly playlist for this week is backed up."
       return response
-  end
+    end
 
-  def get_discover_weekly
-    # fetch discover weekly from spotify, spotify is the owner of the playlist
-    RSpotify::Playlist.find("spotify", user_record.discover_weekly_id)
-  end
+    def get_discover_weekly
+      puts "get dw"
+      # fetch discover weekly from spotify, spotify is the owner of the playlist
+      RSpotify::Playlist.find("spotify", user_record.discover_weekly_id)
+    end
 
+<<<<<<< HEAD
   def create_playlist_on_spotify
     playlist = spotify_user.create_playlist!(playlist_name)
     playlist.add_tracks!(spotify_playlist.tracks)
@@ -61,4 +65,16 @@ class SpotifyBackupService < BaseSpotifyService
 
     playlist
   end
+=======
+    def create_playlist_on_spotify
+      playlist = spotify_user.create_playlist!(playlist_name)
+      playlist.add_tracks!(spotify_playlist.tracks)
+
+      unless playlist
+        return fail! msg: "Couldn't create the playlist on Spotify. Please try again later"
+      end
+
+      playlist
+    end
+>>>>>>> master
 end
