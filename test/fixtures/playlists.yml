@@ -6,7 +6,8 @@ one:
   user: one
   week_of: <%= Time.zone.now.to_date.at_beginning_of_week %>
 
-# two:
-#   name: Discover Weekly Backup (02-05-18)
-#   spotify_id: 987654321
-#   user: one
+two:
+  name: Discover Weekly Backup (02-12-18)
+  spotify_id: 910111213
+  user: two
+  week_of: <%= Time.zone.now.to_date.at_beginning_of_week %>
