@@ -1,11 +1,13 @@
 language: ruby
 rvm:
-- 2.5.0
+  - 2.5.0
 script:
-- bundle exec rails db:migrate RAILS_ENV=test
-- bundle exec rails test
+  - bundle exec rails db:migrate RAILS_ENV=test
+  - bundle exec rails test
 services:
   - postgresql
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp config/database.yml.travis config/database.yml
+run:
+  - bundle exec rake assets:precompile
