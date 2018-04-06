@@ -57,12 +57,12 @@ class PlaylistsController < ApplicationController
 
 
   def sync_discover_weekly
-    @spotify_service = SpotifyBackupService.new(current_user).call
+    spotify_service = SpotifyBackupService.new(current_user).call
 
-    if @spotify_service.success?
-      flash[:notice] = @spotify_service.message
+    if spotify_service.success?
+      flash[:notice] = spotify_service.message
     else
-      flash[:error] = @spotify_service.message
+      flash[:error] = spotify_service.message
     end
 
     redirect_to dashboard_path
