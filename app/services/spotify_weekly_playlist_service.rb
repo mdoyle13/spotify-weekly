@@ -10,6 +10,7 @@ class SpotifyWeeklyPlaylistService < BaseSpotifyService
     
     if playlist
       @response.send("success?=", true)
+      # attach the playlist object the playlist attribute of the @response
       @response.playlist = playlist
     else
       @response.message = "You are not following Discover Weekly. Once you do that come back and try again"
@@ -18,12 +19,12 @@ class SpotifyWeeklyPlaylistService < BaseSpotifyService
   end
 
   private
+  
   def get_weekly_playlist
-    offset = 0
-    playlists = get_all_playlists
-    playlist = playlists.select {|p| p.name == "Discover Weekly"}[0]
+    playlist = get_all_playlists.select {|p| p.name == "Discover Weekly"}[0]
   end
-
+  
+  #TODO FIX ME: this could get crazy if a user has a ton of playlists. 
   def get_all_playlists
     playlists = []
     offset = 0
