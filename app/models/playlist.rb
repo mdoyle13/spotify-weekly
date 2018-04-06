@@ -1,7 +1,8 @@
 class Playlist < ApplicationRecord
   belongs_to :user
   has_many :tracks, dependent: :destroy
-  validate :user_id_and_week_of_is_unique
+  # only validate on create
+  validate :user_id_and_week_of_is_unique, on: [:create] 
 
   # set the week of date before creating. the week of date is how to tell
   # if 'this weeks' discover weekly has been backed up already
