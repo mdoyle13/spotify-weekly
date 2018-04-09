@@ -1,7 +1,7 @@
 require 'activerecord-import/base'
 require 'activerecord-import/active_record/adapters/postgresql_adapter'
 
-class SpotifyBackupService < BaseSpotifyService
+class SpotifyBackupService < BaseSpotifyService  
   def call
     super
     sync_discover_weekly

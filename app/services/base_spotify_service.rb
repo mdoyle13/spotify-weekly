@@ -7,12 +7,14 @@ class BaseSpotifyService
   end
 
   def call
-    # returns a spotify user object
-    @spotify_user = RSpotify::User.new(user_record.auth_hash)
+    get_user_from_spotify
   end
 
   private
-
+  def get_user_from_spotify
+    @spotify_user = RSpotify::User.new(user_record.auth_hash)
+  end
+  
   def fail!(msg: )
     response.message = msg
     return response

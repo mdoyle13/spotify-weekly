@@ -9,6 +9,7 @@ one:
   provider: "spotify"
   uid: "mdoyle3200"
   discover_weekly_id: "12345678910"
+  auth_hash: {}
 
 two:
   email: two@site.com

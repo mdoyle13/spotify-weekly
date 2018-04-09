@@ -14,9 +14,11 @@ module SpotifyWeekly
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    # Rspotify setup
-    RSpotify::authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_CLIENT_SECRET'])
-      
+    # Rspotify setup, but don't do it in the test environment
+    unless Rails.env.test?
+      RSpotify::authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_CLIENT_SECRET'])  
+    end
+    
      unless Rails.env.development?
       Raven.configure do |config|
         config.dsn = ENV['SENTRY_DSN'] 
