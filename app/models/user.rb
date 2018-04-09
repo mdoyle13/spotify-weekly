@@ -15,13 +15,13 @@ class User < ApplicationRecord
 
     # update the attrs
     record.update_attributes(
-        password: Devise.friendly_token.first(8),
-        provider: auth.provider,
-        uid: auth.uid,
-        auth_hash: auth.to_hash,
-        auth_token: auth.credentials.token,
-        refresh_token: auth.credentials.refresh_token,
-      )
+      password: Devise.friendly_token.first(8),
+      provider: auth.provider,
+      uid: auth.uid,
+      auth_hash: auth.to_hash,
+      auth_token: auth.credentials.token,
+      refresh_token: auth.credentials.refresh_token,
+    )
 
     record
   end
@@ -30,7 +30,7 @@ class User < ApplicationRecord
     with_discover_weekly
   end
 
-    def has_discover_weekly?
+  def has_discover_weekly?
     self.discover_weekly_id.present?
   end
 
