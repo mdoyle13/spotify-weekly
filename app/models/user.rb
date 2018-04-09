@@ -31,7 +31,7 @@ class User < ApplicationRecord
   end
 
   def has_discover_weekly?
-    self.discover_weekly_id.present?
+    discover_weekly_id.present?
   end
 
   def has_this_week_backup?
