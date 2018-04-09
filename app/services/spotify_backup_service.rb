@@ -1,3 +1,5 @@
+# these require statements are for the bulk insertion of the track records 
+# Track.import
 require 'activerecord-import/base'
 require 'activerecord-import/active_record/adapters/postgresql_adapter'
 
