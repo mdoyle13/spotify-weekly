@@ -17,36 +17,21 @@ class PlaylistsController < ApplicationController
   end
 
   def restore_to_spotify
-    db_tracks = @playlist.tracks.order('id ASC').collect(&:spotify_id)
-    spotify_tracks = RSpotify::Track.find(db_tracks)
+    spotify_restore = RestorePlaylistToSpotify.call(user: current_user, playlist: @playlist)
 
-    spotify_user = BaseSpotifyService.new(current_user).call
-    spotify_playlist = spotify_user.create_playlist!(@playlist.name)
-    spotify_playlist.add_tracks!(spotify_tracks)
+    if spotify_restore.success?
+      flash[:notice] = "Successfully restored playlist to Spotify"
+    else
+      flash[:error] = spotify_restore.message
 
-    #update with the spotify specific data
-    @playlist.update_with_spotify(spotify_playlist)
-
-    flash[:notice] = "Successfully restored playlist to Spotify"
     redirect_to dashboard_path
   end
 
   def initial_discover_weekly_sync
-    # get the weekly playlist
-    get_weekly_playlist = SpotifyWeeklyPlaylistService.new(current_user).call
-
-    if get_weekly_playlist.success?
-      current_user.update_attributes(discover_weekly_id: get_weekly_playlist.playlist.id)
-    else
-      flash[:error] = get_weekly_playlist.message
-      return redirect_to dashboard_path
-    end
-
-    # backup the playlist
-    spotify_backup = SpotifyBackupService.new(current_user).call
+    spotify_backup = BackupDiscoverWeekly.call(user: current_user)
 
     if spotify_backup.success?
-      flash[:notice] = spotify_backup.message
+      flash[:notice] = "Huzzah - Your Discover Weekly playlist for this week is backed up."
     else
       flash[:error] = spotify_backup.message
       return redirect_to dashboard_path
@@ -57,12 +42,12 @@ class PlaylistsController < ApplicationController
 
 
   def sync_discover_weekly
-    spotify_service = SpotifyBackupService.new(current_user).call
+    spotify_backup = BackupDiscoverWeekly.call(user: current_user)
 
-    if spotify_service.success?
-      flash[:notice] = spotify_service.message
+    if spotify_backup.success?
+      flash[:notice] = "Huzzah - Your Discover Weekly playlist for this week is backed up."
     else
-      flash[:error] = spotify_service.message
+      flash[:error] = spotify_backup.message
     end
 
     redirect_to dashboard_path

@@ -1,9 +1,9 @@
-# these require statements are for the bulk insertion of the track records 
+# these require statements are for the bulk insertion of the track records
 # Track.import
 require 'activerecord-import/base'
 require 'activerecord-import/active_record/adapters/postgresql_adapter'
 
-class SpotifyBackupService < BaseSpotifyService  
+class SpotifyBackupService < BaseSpotifyService
   def call
     super
     sync_discover_weekly
@@ -11,13 +11,13 @@ class SpotifyBackupService < BaseSpotifyService
 
   private
     def sync_discover_weekly
+      @playlist_name = Playlist.this_week_backup_name
       # get the users weekly playlist from spotify
       @spotify_playlist = get_discover_weekly
-      @playlist_name = Playlist.this_week_backup_name
 
       # if its not there for some reason we cannot proceed so fail
       unless @spotify_playlist
-        return fail! msg: "You need to follow the discover weekly playlist :("
+        return fail! msg:
       end
 
       # if the user has auto_sync on
@@ -40,7 +40,7 @@ class SpotifyBackupService < BaseSpotifyService
       response.message = "Huzzah - Your Discover Weekly playlist for this week is backed up."
       return response
     end
-    
+
     def get_discover_weekly
       # fetch discover weekly from spotify, "spotify" is the owner of the playlist, not the user
       RSpotify::Playlist.find("spotify", user_record.discover_weekly_id)
@@ -56,7 +56,7 @@ class SpotifyBackupService < BaseSpotifyService
 
       playlist
     end
-    
+
     def build_tracks
       tracks_array = []
       @spotify_playlist.tracks.each do |track|
@@ -64,5 +64,5 @@ class SpotifyBackupService < BaseSpotifyService
       end
       tracks_array
     end
-    
+
 end
