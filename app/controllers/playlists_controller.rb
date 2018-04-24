@@ -23,7 +23,8 @@ class PlaylistsController < ApplicationController
       flash[:notice] = "Successfully restored playlist to Spotify"
     else
       flash[:error] = spotify_restore.message
-
+    end
+    
     redirect_to dashboard_path
   end
 
