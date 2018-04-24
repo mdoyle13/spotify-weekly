@@ -16,18 +16,6 @@ class PlaylistsController < ApplicationController
     redirect_to dashboard_path
   end
 
-  def restore_to_spotify
-    spotify_restore = RestorePlaylistToSpotify.call(user: current_user, playlist: @playlist)
-
-    if spotify_restore.success?
-      flash[:notice] = "Successfully restored playlist to Spotify"
-    else
-      flash[:error] = spotify_restore.message
-    end
-    
-    redirect_to dashboard_path
-  end
-
   def initial_discover_weekly_sync
     spotify_backup = BackupDiscoverWeekly.call(user: current_user)
 

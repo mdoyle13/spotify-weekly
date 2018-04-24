@@ -28,15 +28,20 @@ Rails.application.routes.draw do
 
   get 'edit_account', to: 'users#edit', as: 'edit_user'
 
+  # namespace :playlists do
+  #   resources :spotify_restore, only: :update, as: :post
+  # end
+
   resources :playlists, only: [:show, :destroy] do
+    scope module: 'playlists' do
+      resource :spotify_restore, only: :create
+    end
+
     post 'initial_discover_weekly_sync', on: :collection
 
     collection do
       post 'sync_discover_weekly'
     end
 
-    member do
-      post 'restore_to_spotify'
-    end
   end
 end
