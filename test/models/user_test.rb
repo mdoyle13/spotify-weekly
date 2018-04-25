@@ -26,5 +26,4 @@ class UserTest < ActiveSupport::TestCase
     refute_includes User.for_backup_job, users(:no_backups)
     assert_includes User.for_backup_job, users(:one)
   end
-
 end

@@ -6,7 +6,7 @@ class GetPlaylistFromSpotify
 
   def call
     return if context.discover_weekly_playlist
-    
+
     begin
       context.discover_weekly_playlist = RSpotify::Playlist.find("spotify", context.discover_weekly_id)
     rescue RestClient::NotFound
