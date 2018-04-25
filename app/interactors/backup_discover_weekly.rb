@@ -1,8 +1,9 @@
 class BackupDiscoverWeekly
   include Interactor::Organizer
   include SpotifyUserContext
-  
-  organize FindDiscoverWeekly, GetPlaylistFromSpotify, CreatePlaylistOnSpotify, CreatePlaylistRecord, CreateTrackRecords
+
+  organize FindDiscoverWeekly, GetPlaylistFromSpotify, DuplicatePlaylistOnSpotify,
+    CreatePlaylistRecord, CreateTrackRecords
 
   # call accepts one argument of a User object
   def call
