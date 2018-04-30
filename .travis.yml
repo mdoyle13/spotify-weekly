@@ -11,8 +11,8 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp config/database.yml.travis config/database.yml
 install:
+  - nvm install v9.11.1
   - bundle install
-  - nvm install node
   - node -v
   - npm i -g yarn
-  - yarn install --ingore-engines
+  - yarn
