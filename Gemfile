@@ -9,6 +9,8 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'
+#interactor gem for interactor pattern
+gem 'interactor-rails'
 # postgres adapter
 gem 'pg', '~> 0.18'
 # Use Puma as the app server

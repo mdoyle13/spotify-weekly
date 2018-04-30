@@ -25,7 +25,7 @@
         <td align="right">
           <div class="btn-group backups-list-table__buton-group" role="group">
             <%= link_to "View Tracks", playlist_path(pl), class: "btn btn-primary btn-sm" %>
-            <%= link_to "Restore to Spotify", restore_to_spotify_playlist_path(pl), method: :post, class: "btn btn-info btn-sm", data: { disable_with: "Hold please..." } %>
+            <%= link_to "Restore to Spotify", playlist_spotify_restore_path(pl), method: :post, class: "btn btn-info btn-sm", data: { disable_with: "Hold please..." } %>
             <%= link_to 'Delete', playlist_path(pl), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
           </div>
         </td>
