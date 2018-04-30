@@ -15,4 +15,4 @@ install:
   - nvm install node
   - node -v
   - npm i -g yarn
-  - yarn
+  - yarn install --ingore-engines
