@@ -22,7 +22,8 @@ gem 'sassc-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker', '~> 3.2'
 # fix security vulnerability in loofah version 2.1.1
-gem 'loofah', '= 2.2.1'
+gem 'loofah', '= 2.2.2'
+gem 'rails-html-sanitizer', '=1.0.4'
 
 gem 'activerecord-import', require: false
 # See https://github.com/rails/execjs#readme for more supported runtimes
