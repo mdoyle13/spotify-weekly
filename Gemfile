@@ -36,6 +36,7 @@ gem 'sidekiq-scheduler'
 gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 gem "sentry-raven"
+gem "interactor"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
