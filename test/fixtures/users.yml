@@ -28,3 +28,10 @@ no_backups:
   provider: "spotify"
   discover_weekly_id:
   auth_hash: {}
+
+auto_sync_off:
+  email: noautsync@site.com
+  provider: "spotify"
+  discover_weekly_id:
+  auth_hash: {}
+  auto_sync: false

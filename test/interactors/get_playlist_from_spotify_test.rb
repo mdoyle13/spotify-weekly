@@ -11,5 +11,11 @@ class GetPlaylistFromSpotifyTest < ActiveSupport::TestCase
     playlist = GetPlaylistFromSpotify.call(discover_weekly_id: "123")
     assert playlist.success?
   end
-  
+
+  test  "it sets the playlist context correctly for the next interactors to use" do
+    RSpotify::Playlist.stubs(:find).returns(true)
+    playlist = GetPlaylistFromSpotify.call(discover_weekly_id: "123")
+    assert playlist.discover_weekly_playlist
+  end
+
 end
