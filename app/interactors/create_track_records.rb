@@ -5,7 +5,6 @@ class CreateTrackRecords
   include Interactor
 
   # needed context
-  # backup_spotify_playlist
   # db_playlist
 
   def call
@@ -14,7 +13,7 @@ class CreateTrackRecords
 
   private
   def build_tracks
-    context.backup_spotify_playlist.tracks.map do |track|
+    context.discover_weekly_playlist.tracks.map do |track|
       context.db_playlist.tracks.build(spotify_id: track.id, data: track)
     end
   end
