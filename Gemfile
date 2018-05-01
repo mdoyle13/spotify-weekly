@@ -15,7 +15,7 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 gem 'sassc-rails', require: false
 gem 'webpacker', '~> 3.2'
-
+gem 'uglifier', '>= 1.3.0'
 # bulk import in ar
 gem 'activerecord-import', require: false
 
