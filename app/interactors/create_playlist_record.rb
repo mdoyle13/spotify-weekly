@@ -13,6 +13,9 @@ class CreatePlaylistRecord
     db_playlist.update_with_spotify(context.backup_spotify_playlist) if context.user.auto_sync?
 
     unless db_playlist.persisted?
+      # unfollow the playlist from spotify if this step doesn't work correctly
+      context.spotify_user.unfollow(context.backup_spotify_playlist) if context.user.auto_sync?
+      
       context.fail! message: db_playlist.errors.full_messages.to_sentence
     end
 
