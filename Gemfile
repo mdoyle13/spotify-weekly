@@ -33,7 +33,7 @@ gem 'rspotify', github: "guilhermesad/rspotify"
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
 
-gem 'bootstrap', '~> 4.0.0'
+gem "bootstrap", ">= 4.1.2"
 gem 'jquery-rails'
 gem "sentry-raven"
 gem "interactor"
